@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+   <argument name="data" xsi:type="array">
+       <item name="js_config" xsi:type="array">
+           <item name="provider" xsi:type="string">devester_poll_answer.devester_poll_answer_data_source</item>
+           <item name="deps" xsi:type="string">devester_poll_answer.devester_poll_answer_data_source</item>
+       </item>
+       <item name="label" xsi:type="string" translate="true">Dynamic Rows</item>
+       <item name="config" xsi:type="array">
+           <item name="dataScope" xsi:type="string">data</item>
+           <item name="namespace" xsi:type="string">devester_poll</item>
+       </item>
+       <item name="template" xsi:type="string">templates/form/collapsible</item>
+<!--        <item name="buttons" xsi:type="array">
+           <item name="save" xsi:type="string">Devester\Poll\Block\Adminhtml\DynamicRows\Edit\SaveButton</item>
+       </item> -->
+   </argument>
+   <dataSource name="devester_poll_answer_data_source">
+       <argument name="dataProvider" xsi:type="configurableObject">
+           <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+           <argument name="name" xsi:type="string">devester_poll_answer_data_source</argument>
+           <argument name="primaryFieldName" xsi:type="string">row_id</argument>
+           <argument name="requestFieldName" xsi:type="string">scope</argument>
+
+<!--            <argument name="data" xsi:type="array">
+
+               <item name="config" xsi:type="array">
+
+                   <item name="submit_url" xsi:type="url" path="bss/row/save"/>
+
+               </item>
+
+           </argument> -->
+
+       </argument>
+
+       <argument name="data" xsi:type="array">
+
+           <item name="js_config" xsi:type="array">
+
+               <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+
+           </item>
+
+       </argument>
+
+   </dataSource>
+
+
+
+</form>

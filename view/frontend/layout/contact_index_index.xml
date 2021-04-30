@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Jason Sylvester Devester
+ * @copyright Copyright © 2019 Devester. All rights reserved.
+ * @package Devester/Poll
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		<referenceContainer name="main">
+<!-- 			<block class="SolideWebservices\Flexslider\Block\Flexslider" name="flexslider_content_top" template="SolideWebservices_Flexslider::flexslider.phtml" ifconfig="flexslider/advanced_settings/enable_selected_positions" before="-">
+				<action method="setPosition"><argument name="position" xsi:type="string">content_top</argument></action>
+				<action method="setScope"><argument name="scope" xsi:type="string">selected</argument></action>
+			</block> -->
+			<block class="Devester\Poll\Block\Poll" name="poll1" template="Devester_Poll::poll.phtml" before="-">
+				<action method="setPollId">
+					<argument name="code" xsi:type="string">1</argument>
+				</action>
+			</block>
+		</referenceContainer>
+	</body>
+</page>

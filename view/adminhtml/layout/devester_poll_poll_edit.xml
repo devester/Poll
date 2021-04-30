@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+<!-- 	<head>
+		<title>Polls Management</title>
+	</head> -->
+	<body>
+		<referenceBlock name="menu">
+			<action method="setActive">
+				<argument name="itemId" xsi:type="string">Devester_Poll::poll</argument>
+			</action>
+		</referenceBlock>
+		<referenceContainer name="content">
+			<block class="Devester\Poll\Block\Adminhtml\Poll\Edit" name="devester_poll_poll_edit" />
+			<!-- <block class="Magento\Catalog\Block\Adminhtml\Product\Edit\NewCategory" name="new-category" template="Magento_Catalog::catalog/product/edit/category/new/form.phtml" /> -->
+			<!-- <uiComponent name="devester_poll_answer_row"/> -->
+		</referenceContainer>
+		<referenceContainer name="left">
+			<block class="Devester\Poll\Block\Adminhtml\Poll\Edit\Tabs" name="devester_poll_edit_tabs">
+<!-- 				<action method="addTab">
+					<argument name="name" xsi:type="string">poll_section_tab</argument>
+					<argument name="block" xsi:type="string">devester_poll_edit_tab_poll</argument>
+				</action> -->
+				<container label="Poll" name="poll_section">
+				<!-- <container label="Poll" name="main"> -->
+					<block class="Devester\Poll\Block\Adminhtml\Poll\Edit\Tab\Poll" name="devester_poll_edit_tab_poll" />
+				</container>
+<!-- 				<action method="addTab">
+					<argument name="name" xsi:type="string">answers_section_tab</argument>
+					<argument name="block" xsi:type="string">devester_poll_edit_tab_answers</argument>
+				</action>-->
+				<container label="Answers" name="answers_section">
+					<block class="Devester\Poll\Block\Adminhtml\Poll\Edit\Tab\Answers" name="devester_poll_edit_tab_answers" />
+					<!-- <block class="Devester\Poll\Block\Adminhtml\Poll\Edit\Tab\Components\AnswersList" name="devester_poll_edit_tab_answers_components_answerslist" /> -->
+					<!-- <block class="Nostress\Koongo\Block\Adminhtml\Channel\Profile\General\Edit\Tab\Shippingcost\Intervals" name="nostress_koongo_channel_profile_general_edit_tab_shippingcost_intervals" as="shipping_intervals"/> -->
+
+                    <uiComponent name="devester_poll_answer_row"/>
+				</container> 
+			</block>
+		</referenceContainer>
+	</body>
+</page>

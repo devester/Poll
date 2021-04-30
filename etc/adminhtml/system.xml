@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<!-- 
+/*
+ * @author Jason Devester
+ * @copyright Copyright © 2019 Devester. All rights reserved.
+ * @package Devester\Core
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<section id="devester_poll" translate="label" type="text" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10">
+			<label>Poll</label>
+			<tab>devester</tab>
+			<resource>Devester_Poll::poll_config</resource>
+<!-- 			<group id="information" translate="label" type="text" showInDefault="1" showInStore="1" showInWebsite="0" sortOrder="5">
+				<label>System Information</label>
+				<frontend_model>Devester\Core\Block\Info</frontend_model>
+			</group> -->
+		</section>
+	</system>
+</config>

@@ -1,0 +1,104 @@
+<?php
+/**
+ * @author Jason Sylvester Devester
+ * @copyright Copyright © 2019 Devester. All rights reserved.
+ * @package Devester/Poll
+ */
+?>
+<?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
+<?php if ($block->hasValidPoll()) :
+
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $customerSession = $objectManager->get('Magento\Customer\Model\Session');
+    $pollCollection = $block->getPoll();
+
+    foreach ($pollCollection as $poll) :
+    	$answers = $block->getAnswers($poll['poll_id']);
+    	if (count($answers) > 0) :
+    		?>
+    		<div class="block block-poll">
+				<div class="block-title">
+					<span><?= $poll->getTitle(); ?></span>
+				</div>
+				<div class="block-content">
+					<?php
+						// $block->getAnswersHtml()->setData("poll", $poll);                            
+						// echo $block->getAnswersHtml();
+					 ?>
+					<?php /*
+					<form id="poll-form" method="post">
+						<ul class="poll-answers">
+						<?php $answerCounter = 0; ?>
+						<?php foreach ($answers as $answer) : ?>
+
+							<?php
+							$answerClasses = 'answer';
+							if ($answerCounter % 2 == 0) {
+								$answerClasses .= ' ';
+								$answerClasses .= 'even';
+							} else {
+								$answerClasses .= ' ';
+								$answerClasses .= 'odd';
+							};
+							if ($answerCounter == 0) {
+								$answerClasses .= ' ';
+								$answerClasses .= 'first';
+							};
+							if ($answerCounter == count($answers)) {
+								$answerClasses .= ' ';
+								$answerClasses .= 'last';
+							};
+							?>
+	    						<li class="<?= $answerClasses ?>">
+	    							<input type="radio" name="vote" class="radio poll_vote" id="vote_<?= $answerCounter ?>" value="<?= $answer->getAnswerId(); ?>">
+	    							<span class="label">
+	    								<label for="vote_<?= $answerCounter ?>"><?= $answer->getTitle(); ?></label>
+	    							</span>
+	    						</li>
+	    					<?php $answerCounter++; ?>
+	    				<?php endforeach; // end foreach $answers ?>
+						</ul>
+						<div class="actions">
+							<input type="submit" value="<?= __('Submit') ?>">
+						</div>
+					</form>
+					*/ ?>
+					<?= $block->getAnswersHtml(); ?>
+				</div>
+    		</div>
+    		<?php
+    	endif; // end if poll > 0
+    endforeach; // end foreach $pollCollection
+endif; // end hasValidGroup()
+?>
+<script>
+require([
+	'jquery'
+],function($) {
+    $(document).ready(function() {
+        $("#poll-form").submit(function(){
+            var url = "<?= $block->getBaseUrl() . $block->getFormAction() ?>";
+            var form = $("#poll-form");
+
+            $.ajax({
+            url: url,
+            type: "POST",
+            data: form.serialize(),
+            showLoader: true,
+            context: $('.block.block-poll'),
+            cache: false,
+            success: function(response){
+                // console.log(response);
+                location.reload();
+            }
+        });
+        return false;
+        });
+    });
+});
+</script>

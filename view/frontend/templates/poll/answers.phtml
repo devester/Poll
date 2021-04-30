@@ -1,0 +1,33 @@
+<form id="poll-form" method="post">
+	<?php var_dump($this->getPoll()); ?>
+	<?php $answers = $block->getAnswers(1); ?>
+	<ul class="poll-answers">
+	<?php $answerCounter = 0; ?>
+	<?php foreach ($answers as $answer) : ?>
+
+		<?php
+		$answerClasses = 'answer';
+		if ($answerCounter % 2 == 0) {
+			$answerClasses .= ' ';
+			$answerClasses .= 'even';
+		} else {
+			$answerClasses .= ' ';
+			$answerClasses .= 'odd';
+		};
+		if ($answerCounter == 0) {
+			$answerClasses .= ' ';
+			$answerClasses .= 'first';
+		};
+		if ($answerCounter == count($answers)) {
+			$answerClasses .= ' ';
+			$answerClasses .= 'last';
+		};
+		?>
+			<li class="<?= $answerClasses ?>">
+				<span class="label-title"><?= $answer->getTitle(); ?></span>
+				<span class="label-votes"><?= $answer->getVotesCount(); ?></span>
+			</li>
+		<?php $answerCounter++; ?>
+	<?php endforeach; // end foreach $answers ?>
+	</ul>
+</form>

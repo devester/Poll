@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="devester_poll_poll_listing_data_source" xsi:type="string">Devester\Poll\Model\ResourceModel\Poll\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Devester\Poll\Model\ResourceModel\Poll\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">devester_poll_poll</argument>
+            <argument name="resourceModel" xsi:type="string">Devester\Poll\Model\ResourceModel\Poll</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="devester_poll_answer_data_source" xsi:type="string">Devester\Poll\Model\ResourceModel\Answer\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Devester\Poll\Model\ResourceModel\Answer" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">devester_poll_answer</argument>
+            <argument name="resourceModel" xsi:type="string">Devester\Poll\Model\ResourceModel\Answer</argument>
+        </arguments>
+    </virtualType>
+</config>

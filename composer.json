@@ -1,0 +1,22 @@
+{
+    "name": "devester/module-poll",
+    "description": "",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "email": "helseendjels@gmail.com",
+            "name": "Jason Sylvester"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Devester\\Poll\\": ""
+        }
+    }
+}

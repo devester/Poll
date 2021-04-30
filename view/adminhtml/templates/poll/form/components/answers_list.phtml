@@ -1,0 +1,91 @@
+<?php
+/**
+ * Magento Module developed by NoStress Commerce
+ *
+ * NOTICE OF LICENSE
+ *
+ * This program is licensed under the Koongo software licence (by NoStress Commerce). 
+ * With the purchase, download of the software or the installation of the software 
+ * in your application you accept the licence agreement. The allowed usage is outlined in the
+ * Koongo software licence which can be found under https://docs.koongo.com/display/koongo/License+Conditions
+ *
+ * Any modification or distribution is strictly forbidden. The license
+ * grants you the installation in one application. For multiuse you will need
+ * to purchase further licences at https://store.koongo.com/.
+ *
+ * See the Koongo software licence agreement for more details.
+ * @copyright Copyright (c) 2017 NoStress Commerce (http://www.nostresscommerce.cz, http://www.koongo.com/)
+ *
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block Nostress\Koongo\Block\Adminhtml\Channel\Profile\General\Edit\Tab\Shippingcost\Intervals */
+?>
+
+<fieldset class="fieldset">
+    <legend class="legend"><span><?php /* @escapeNotVerified */ echo __('Poll Answers') ?></span></legend>
+    
+    <div id="manage-options-panel">
+        <table class="admin__control-table">
+            <thead>
+                <tr id="attribute-options-table">
+                    <th class="col-draggable"></th>
+
+                    <!-- <th class="col-default control-table-actions-th"><?php /* @escapeNotVerified */ echo __('Is Default') ?></th> -->
+                    <th id="answer_table_column_title"><?php echo __("Title") ?></th>  
+                    <th id="answer_table_column_votes"><?php echo __("Votes") ?></th>                    
+                    <th class="col-delete">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody data-role="options-container" class="ignore-validate"></tbody>
+            <tfoot>
+            <tr>
+                <th colspan="5" class="validation">
+                    <input type="hidden" class="required-dropdown-attribute-entry" name="dropdown_attribute_validation"/>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="5" class="col-actions-add">
+           			<button id="add_new_option_button" title="<?php /* @escapeNotVerified */ echo __('Add Answer'); ?>"
+                            type="button" class="action- scalable add">
+                    	<span><?php /* @escapeNotVerified */ echo __('Add Answer'); ?></span>
+                	</button>                   
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+        <input type="hidden" id="option-count-check" value="" />
+    </div>
+    <script id="row-template" type="text/x-magento-template">		
+         <tr class="interval_row">
+            <td class="col-draggable">                
+                    <div data-role="draggable-handle" class="draggable-handle" title="<?php /* @escapeNotVerified */ echo __('Sort Option'); ?>"></div>
+                <input data-role="order" type="hidden" name="answer_item[answer][<%- data.id %>][answer_order]"  value="<%- data.answer_order %>" />
+            </td>            
+            <td class="col-<%- data.id %>"><input id="answer_item_title_<%- data.id %>" name="answer_item[answer][<%- data.id %>][title]" value="<%- data.title %>" class="input-text" type="text" /></td>
+			<td class="col-<%- data.id %>"><input id="answer_item_votes_<%- data.id %>" name="answer_item[answer][<%- data.id %>][votes_count]" value="<%- data.votes_count %>" class="input-text" type="text" /></td>
+            
+
+            <td id="delete_button_container_<%- data.id %>" class="col-delete">
+                <input type="hidden" class="delete-flag" name="answer_item[answer][<%- data.id %>][delete]" value="" />
+                    <button id="delete_button_<%- data.id %>" title="<?php /* @escapeNotVerified */ echo __('Delete') ?>" type="button"
+                        class="action- scalable delete delete-option"
+                        >
+                        <span><?php /* @escapeNotVerified */ echo __('Delete') ?></span>
+                    </button>
+            </td>
+        </tr>
+    </script>
+    <?php  $values = $block->getAnswerArrayJSON();  ?>
+    <script type="text/x-magento-init">        
+		{
+            "*": {
+                "Magento_Catalog/js/options": {                   
+                    "isSortable":  <?php echo "1"; ?>,
+                    "isReadOnly": <?php echo "0"; ?>
+                }
+            }
+        }
+    </script>
+</fieldset>

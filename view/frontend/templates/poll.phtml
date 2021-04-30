@@ -1,0 +1,146 @@
+<?php
+/**
+ * @author Jason Sylvester Devester
+ * @copyright Copyright © 2019 Devester. All rights reserved.
+ * @package Devester/Poll
+ */
+?>
+<?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
+
+<?php
+// Check if poll is correct collection
+if ($block->hasValidPoll()):
+
+    // $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    // $customerSession = $objectManager->get('Magento\Customer\Model\Session');
+    $pollCollection = $block->_getCollection();
+    // var_dump($pollCollection);
+    foreach ($pollCollection as $poll) :
+    	// var_dump($poll);
+    	$answers = $block->getAnswers($poll['poll_id']);
+    	if (count($answers) > 0) :
+    		?>
+    		<div class="block block-poll">
+				<div class="block-title">
+					<span><?= $poll->getTitle(); ?></span>
+				</div>
+				<div class="block-content" id="to-replace">
+
+					<?php if ($block->hasVoted($poll['poll_id']) == false): ?>
+					<form id="poll-form" method="post">
+						<ul class="poll-answers">
+						<?php $answerCounter = 0; ?>
+						<?php foreach ($answers as $answer) : ?>
+
+							<?php
+							$answerClasses = 'answer';
+							if ($answerCounter % 2 == 0) {
+								$answerClasses .= ' ';
+								$answerClasses .= 'even';
+							} else {
+								$answerClasses .= ' ';
+								$answerClasses .= 'odd';
+							};
+							if ($answerCounter == 0) {
+								$answerClasses .= ' ';
+								$answerClasses .= 'first';
+							};
+							if ($answerCounter == count($answers)) {
+								$answerClasses .= ' ';
+								$answerClasses .= 'last';
+							};
+							?>
+								<li class="<?= $answerClasses ?>">
+									<input type="radio" name="vote" class="radio poll_vote" id="vote_<?= $answerCounter ?>" value="<?= $answer->getAnswerId(); ?>">
+									<span class="label">
+										<label for="vote_<?= $answerCounter ?>"><?= $answer->getTitle(); ?></label>
+									</span>
+								</li>
+							<?php $answerCounter++; ?>
+						<?php endforeach; // end foreach $answers ?>
+						</ul>
+						<div class="actions">
+							<input type="submit" value="<?= __('Submit') ?>">
+						</div>
+					</form>
+					<script>
+					require([
+						'jquery',
+						'Magento_Ui/js/model/messageList'
+					],function($, globalMessageList) {
+					    $(document).ready(function(messageContainer) {
+
+					    	messageContainer = messageContainer || globalMessageList;
+
+					        $("#poll-form").submit(function(){
+					            var url = "<?= $block->getBaseUrl() . $block->getFormAction() . '/poll_id/' . $poll['poll_id'] ?>";
+					            var form = $("#poll-form");
+
+					            $.ajax({
+					            url: url,
+					            type: "POST",
+					            data: form.serialize(),
+					            showLoader: true,
+					            context: $('.block.block-poll'),
+					            cache: false,
+					            success: function(response){
+					                dom_nodes = $($.parseHTML(response));
+					                variable = dom_nodes.find('.block-poll .block-content').html();
+
+			                        // messageContainer.addSuccessMessage({
+			                        //     message: "<?= __('Poll answered!') ?>"
+			                        // });
+
+					                $(".block-poll .block-content").html(variable);
+					                // console.log(variable);
+
+					            }
+					        });
+					        return false;
+					        });
+					    });
+					});
+					</script>
+					<?php endif; ?>
+					<?php if ($block->hasVoted($poll['poll_id']) == true): ?>
+						<?php $answerCounter = 0; ?>
+						<?php foreach ($answers as $answer) : ?>
+
+							<?php
+							$answerClasses = 'answer';
+							if ($answerCounter % 2 == 0) {
+								$answerClasses .= ' ';
+								$answerClasses .= 'even';
+							} else {
+								$answerClasses .= ' ';
+								$answerClasses .= 'odd';
+							};
+							if ($answerCounter == 0) {
+								$answerClasses .= ' ';
+								$answerClasses .= 'first';
+							};
+							if ($answerCounter == count($answers)) {
+								$answerClasses .= ' ';
+								$answerClasses .= 'last';
+							};
+							?>
+								<li class="<?= $answerClasses ?>">
+									<span class="label-title"><?= $answer->getTitle(); ?></span>
+									<span class="label-votes"><?= $answer->getVotesCount(); ?></span>
+								</li>
+							<?php $answerCounter++; ?>
+						<?php endforeach; // end foreach $answers ?>
+						</ul>
+					<?php endif; ?>
+				</div>
+    		</div>
+    		<?php
+    	endif; // end if poll > 0
+    endforeach; // end foreach $pollCollection
+endif; // end hasValidGroup()
+?>

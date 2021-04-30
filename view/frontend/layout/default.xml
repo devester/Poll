@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Jason Sylvester Devester
+ * @copyright Copyright © 2019 Devester. All rights reserved.
+ * @package Devester/Poll
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+		<!-- <css src="Devester_Poll::css/poll.min.css"/> -->
+	</head>
+	<body>
+
+	</body>
+</page>

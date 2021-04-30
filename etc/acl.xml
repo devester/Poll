@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<!--
+/*
+ * @author Jason Devester
+ * @copyright Copyright © 2019 Devester. All rights reserved.
+ * @package Devester\Poll
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+            	<resource id="Devester_Core::base">
+            		<resource id="Devester_Core::config">
+            			<resource id="Devester_Poll::poll_config" title="Poll Configuration" sortOrder="20" />
+            		</resource>
+					<resource id="Devester_Poll::Polls" title="Polls" sortOrder="20" />
+            	</resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

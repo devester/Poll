@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!-- 
+/*
+ * @author Thijs Devester
+ * @copyright Copyright © 2019 Devester. All rights reserved.
+ * @package Devester\Poll
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Devester_Poll::poll_config"
+             title="Poll"
+        	 translate="title"
+             module="Devester_Poll"
+             sortOrder="20"
+             resource="Devester_Poll::poll_config"
+             parent="Devester_Core::config_title"
+             action="adminhtml/system_config/edit/section/devester_poll"
+        />
+        <add id="Devester_Poll::poll_content"
+        	 title="Poll Content"
+        	 translate="title"
+        	 module="Devester_Poll"
+        	 sortOrder="20"
+        	 parent="Devester_Core::devester"
+        	 resource="Devester_Poll::content"
+        	/>
+        <add id="Devester_Poll::polls"
+             title="Polls"
+        	 translate="title"
+             module="Devester_Poll"
+             sortOrder="20"
+             resource="Devester_Poll::polls"
+             parent="Devester_Poll::poll_content"
+             action="devester_poll/poll/index"
+        />
+
+    </menu>
+</config>
